@@ -30,15 +30,6 @@ Build a machine learning model capable of identifying fraudulent transactions wh
 
 ## 🔧 Project Workflow
 
-confused the Markdown parser.
-
-## Fix it properly
-
-Replace **everything from `## 🔧 Project Workflow` to the end of the README** with this:
-
-```markdown
-## 🔧 Project Workflow
-
 **Data Loading** → **Data Cleaning & EDA** → **Feature Engineering** → **Class Imbalance Handling** → **Logistic Regression Baseline** → **XGBoost** → **Feature Importance Analysis** → **Leakage-Aware Feature Selection** → **Temporal Validation**
 
 ## 🤖 Models
