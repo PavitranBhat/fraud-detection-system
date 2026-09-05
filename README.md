@@ -1,93 +1,107 @@
 # Fraud Detection System
 
-An end-to-end machine learning project for detecting fraudulent financial transactions using the PaySim simulated mobile-money transaction dataset.
+An end-to-end machine learning system for detecting fraudulent financial transactions using the PaySim simulated mobile-money transaction dataset.
 
-## Project Objective
+## Objective
 
-The objective of this project is to develop a machine learning system that can classify financial transactions as:
-
-- `0` → Legitimate transaction
-- `1` → Fraudulent transaction
-
-The project focuses on exploratory data analysis, feature engineering, handling class imbalance, model development, evaluation, and eventually exposing the trained model through an API.
+Build a machine learning model capable of identifying fraudulent transactions while minimizing false positives in a highly imbalanced dataset.
 
 ## Dataset
 
-This project uses the PaySim simulated mobile-money transaction dataset.
+- **Dataset:** PaySim simulated mobile-money transactions
+- **Transactions:** 6,362,620
+- **Features:** 11
+- **Fraudulent transactions:** 8,213
+- **Fraud rate:** ~0.129%
 
-The dataset contains:
+> The dataset is simulated and does not contain real customer or banking information.
 
-- 6,362,620 transactions
-- 11 original features
-- 8,213 fraudulent transactions
-- Highly imbalanced target variable
+## 🛠️ Tech Stack
 
-The raw dataset is not included in this repository because of its large file size.
+- Python
+- Pandas
+- NumPy
+- Scikit-learn
+- XGBoost
+- Matplotlib
+- Seaborn
+- Jupyter Notebook
+- Git & GitHub
 
-## Dataset Features
-
-| Feature | Description |
-|---|---|
-| `step` | Simulated time step; approximately one hour per step |
-| `type` | Transaction type |
-| `amount` | Transaction amount |
-| `nameOrig` | Identifier of the transaction originator |
-| `oldbalanceOrg` | Originator's balance before the transaction |
-| `newbalanceOrig` | Originator's balance after the transaction |
-| `nameDest` | Identifier of the transaction destination |
-| `oldbalanceDest` | Destination balance before the transaction |
-| `newbalanceDest` | Destination balance after the transaction |
-| `isFraud` | Target variable indicating fraudulent transactions |
-| `isFlaggedFraud` | Rule-based fraud flag provided by the dataset |
-
-## Day 1 — Initial EDA
-
-### Dataset Structure
-
-Loaded the dataset using Pandas and verified:
-
-- Shape: `6,362,620 × 11`
-- No missing values
-- Numerical and categorical feature types identified
-
-### Class Distribution
-
-The target variable contains:
-
-- Legitimate transactions: `6,354,407`
-- Fraudulent transactions: `8,213`
-
-Fraud represents only a very small proportion of the dataset, making this a highly imbalanced classification problem.
-
-### Transaction Type Analysis
-
-The dataset contains five transaction types:
-
-- `CASH_OUT`
-- `PAYMENT`
-- `CASH_IN`
-- `TRANSFER`
-- `DEBIT`
-
-Fraudulent transactions in this dataset occur only in:
-
-- `CASH_OUT`
-- `TRANSFER`
-
-However, these transaction types are not inherently fraudulent; the majority of transactions within them are legitimate.
-
-### Transaction Amount Analysis
-
-Fraudulent transactions showed substantially higher average and median transaction amounts compared with legitimate transactions.
-
-However, transaction amount alone cannot determine whether a transaction is fraudulent.
-
-### Balance Analysis
-
-Investigated the relationship between transaction amounts and account balances.
-
-Engineered two initial balance-consistency features:
+## 🔧 Project Workflow
 
 ```text
-balance_error_orig
-balance_error_dest
+Data Loading
+     ↓
+Data Cleaning & EDA
+     ↓
+Feature Engineering
+     ↓
+Class Imbalance Handling
+     ↓
+Logistic Regression Baseline
+     ↓
+XGBoost
+     ↓
+Feature Importance Analysis
+     ↓
+Leakage-Aware Feature Selection
+     ↓
+Temporal Validation
+
+** 🤖 Models**
+Logistic Regression Baseline
+Fraud Precision: 3.38%
+Fraud Recall: 98.11%
+F1-score: 6.53%
+ROC-AUC: 0.9962
+PR-AUC: 0.6196
+
+**Final XGBoost Model**
+The final model uses a realistic feature set and is evaluated using a temporal train-test split.
+
+Fraud Precision: 93.60%
+Fraud Recall: 81.84%
+F1-score: 87.32%
+ROC-AUC: 0.9997
+PR-AUC: 0.9641
+False Positives: 238
+False Negatives: 772
+
+**Key Features**
+
+The final model uses features including:
+- Transaction amount
+- Sender's pre-transaction balance
+- Receiver's pre-transaction balance
+- Transaction type
+- Transaction-to-balance ratios
+- Transaction time step
+
+**Validation**
+
+A temporal split was used to evaluate generalization to later transactions.
+
+- Training: Steps ≤ 355
+- Testing: Steps > 355
+This provides a more realistic evaluation than relying only on a random train-test split.
+
+**Project Structure**
+fraud-detection-system/
+│
+├── data/
+│   └── raw/
+│
+├── notebooks/
+│   └── 01_eda.ipynb
+│
+├── .gitignore
+└── README.md
+
+**Future Improvements**
+- Hyperparameter tuning
+- Threshold optimization
+- SHAP-based model explainability
+- FastAPI prediction API
+- Streamlit interface
+- Model monitoring and drift detection
