@@ -30,47 +30,43 @@ Build a machine learning model capable of identifying fraudulent transactions wh
 
 ## 🔧 Project Workflow
 
-```text
-Data Loading
-     ↓
-Data Cleaning & EDA
-     ↓
-Feature Engineering
-     ↓
-Class Imbalance Handling
-     ↓
-Logistic Regression Baseline
-     ↓
-XGBoost
-     ↓
-Feature Importance Analysis
-     ↓
-Leakage-Aware Feature Selection
-     ↓
-Temporal Validation
+confused the Markdown parser.
 
-## Models
-Logistic Regression Baseline
-Fraud Precision: 3.38%
-Fraud Recall: 98.11%
-F1-score: 6.53%
-ROC-AUC: 0.9962
-PR-AUC: 0.6196
+## Fix it properly
 
- ## Final XGBoost Model
+Replace **everything from `## 🔧 Project Workflow` to the end of the README** with this:
+
+```markdown
+## 🔧 Project Workflow
+
+**Data Loading** → **Data Cleaning & EDA** → **Feature Engineering** → **Class Imbalance Handling** → **Logistic Regression Baseline** → **XGBoost** → **Feature Importance Analysis** → **Leakage-Aware Feature Selection** → **Temporal Validation**
+
+## 🤖 Models
+
+### Logistic Regression Baseline
+
+- Fraud Precision: **3.38%**
+- Fraud Recall: **98.11%**
+- F1-score: **6.53%**
+- ROC-AUC: **0.9962**
+- PR-AUC: **0.6196**
+
+### Final XGBoost Model
+
 The final model uses a realistic feature set and is evaluated using a temporal train-test split.
 
-Fraud Precision: 93.60%
-Fraud Recall: 81.84%
-F1-score: 87.32%
-ROC-AUC: 0.9997
-PR-AUC: 0.9641
-False Positives: 238
-False Negatives: 772
+- Fraud Precision: **93.60%**
+- Fraud Recall: **81.84%**
+- F1-score: **87.32%**
+- ROC-AUC: **0.9997**
+- PR-AUC: **0.9641**
+- False Positives: **238**
+- False Negatives: **772**
 
-## Key Features
+## 🔍 Key Features
 
 The final model uses features including:
+
 - Transaction amount
 - Sender's pre-transaction balance
 - Receiver's pre-transaction balance
@@ -78,15 +74,18 @@ The final model uses features including:
 - Transaction-to-balance ratios
 - Transaction time step
 
-## Validation
+## 📈 Validation
 
 A temporal split was used to evaluate generalization to later transactions.
 
 - Training: Steps ≤ 355
 - Testing: Steps > 355
+
 This provides a more realistic evaluation than relying only on a random train-test split.
 
-## Project Structure
+## 📁 Project Structure
+
+```text
 fraud-detection-system/
 │
 ├── data/
@@ -98,10 +97,4 @@ fraud-detection-system/
 ├── .gitignore
 └── README.md
 
- ## Future Improvements
-- Hyperparameter tuning
-- Threshold optimization
-- SHAP-based model explainability
-- FastAPI prediction API
-- Streamlit interface
 - Model monitoring and drift detection
